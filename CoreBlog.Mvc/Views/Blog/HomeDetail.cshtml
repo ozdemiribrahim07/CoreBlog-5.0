@@ -1,0 +1,150 @@
+﻿@model CoreBlog.Entities.Dtos.BlogDto
+@{
+    Layout = "HomeLayout";
+
+}
+
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8">
+
+
+
+    <link href="/HomeLay/css/bootstrap.css" rel='stylesheet' type='text/css' />
+    <link rel="stylesheet" href="css/single.css">
+    <link href="/HomeLay/css/style.css" rel='stylesheet' type='text/css' />
+    <link href="/HomeLay/css/fontawesome-all.css" rel="stylesheet">
+    <link href="//fonts.googleapis.com/css?family=Poppins:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800"
+          rel="stylesheet">
+</head>
+
+<body>
+
+
+    <!--//banner-->
+    <section class="banner-bottom">
+        <!--/blog-->
+        <div class="container">
+            <div class="row">
+                <!--left-->
+                <div class="col-lg-8 left-blog-info-w3layouts-agileits text-left">
+
+                    <div class="blog-grid-top">
+                        <div class="b-grid-top">
+
+                            <div class="blog_info_left_grid">
+
+                                <img src="@Model.Blog.BlogImage" class="img-fluid" alt="">
+
+                            </div>
+
+                            <div class="blog-info-middle">
+                                <ul>
+                                    <li>
+
+                                        <i class="far fa-calendar-alt"></i> @Model.Blog.DateCreated
+
+                                    </li>
+                                    <li class="mx-2">
+
+                                        <i class="far fa-thumbs-up"></i> @Model.Blog.ViewCount
+
+                                    </li>
+                                    <li>
+
+                                        <i class="far fa-comment"></i> @Model.Blog.CommentCount
+
+                                    </li>
+
+                                </ul>
+                            </div>
+                        </div>
+
+                        <h3>
+                            <a href="single.html">@Model.Blog.BlogTitle </a>
+                        </h3>
+
+                        <p>
+                            @Model.Blog.BlogContent
+                        </p>
+
+                        <a asp-controller="Home" asp-action="Index" asp-area="" class="btn btn-primary read-m">Anasayfa</a>
+                    </div>
+
+                    
+                        @foreach (var item in Model.Blog.Comments)
+                        {
+
+
+                            <div class="comment-top">
+                                <h4>Yorumlar</h4>
+                                <div class="media">
+                                    <img src="images/t1.jpg" alt="" class="img-fluid" />
+                                    <div class="media-body">
+                                        <h5 class="mt-0">@item.CreatedName</h5>
+                                        <p>
+                                            @item.CommentText
+                                        </p>
+
+
+                                    </div>
+                                </div>
+                            </div>
+
+                        }
+                   
+
+                    @await Html.PartialAsync("Add" , new { blogid = ViewBag.c }) 
+
+
+                </div>
+
+                <!--//left-->
+                <!--right-->
+                @await Component.InvokeAsync("TopNews") 
+                <!--//right-->
+            </div>
+        </div>
+    </section>
+
+
+    <script src="/HomeLayjs/jquery-2.2.3.min.js"></script>
+
+    <script src="/HomeLay/js/move-top.js"></script>
+    <script src="/HomeLayjs/easing.js"></script>
+    <script>
+        jQuery(document).ready(function ($) {
+            $(".scroll").click(function (event) {
+                event.preventDefault();
+                $('html,body').animate({
+                    scrollTop: $(this.hash).offset().top
+                }, 900);
+            });
+        });
+    </script>
+
+
+    <script>
+        $(document).ready(function () {
+
+            $().UItoTop({
+                easingType: 'easeOutQuart'
+            });
+
+        });
+    </script>
+    <a href="#home" class="scroll" id="toTop" style="display: block;">
+        <span id="toTopHover" style="opacity: 1;"> </span>
+    </a>
+
+    <!-- //Custom-JavaScript-File-Links -->
+    <script src="/HomeLayjs/bootstrap.js"></script>
+
+
+</body>
+
+</html>

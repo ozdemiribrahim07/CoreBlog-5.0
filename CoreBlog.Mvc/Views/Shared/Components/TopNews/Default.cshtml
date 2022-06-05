@@ -1,0 +1,42 @@
+﻿@model CoreBlog.Mvc.Models.TopNewsViewModel
+
+<aside class="col-lg-4 agileits-w3ls-right-blog-con text-right">
+    <div class="right-blog-info text-left">
+
+
+
+        <div class="tech-btm">
+            <h4>Haftanın En İyi Blogları</h4>
+           
+            @foreach (var item in Model.Blogs)
+            {
+
+
+
+            <div class="blog-grids row mb-3">
+                <div class="col-md-5 blog-grid-left">
+                    
+                        <img src="@item.BlogImage" class="img-fluid" alt="">
+                    
+                </div>
+                <div class="col-md-7 blog-grid-right">
+
+                    <h5>
+                        <a>@item.BlogTitle </a>
+                    </h5>
+                    <div class="sub-meta">
+                        <span>
+                            <i class="far fa-clock"></i> @item.DateCreated
+                        </span>
+                    </div>
+                </div>
+
+            </div>
+            }
+          
+        </div>
+          
+
+    </div>
+
+</aside>

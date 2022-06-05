@@ -1,0 +1,96 @@
+﻿@model CoreBlog.Entities.Dtos.CategoryListDto
+
+@{
+    ViewData["Title"] = "Kategori Index";
+    Layout = "_Layout";
+}
+
+
+@if (Model.SonucStatus == CoreBlog.Shared.Utilitie.Sonuc.ComplexType.SonucStatus.Success)
+{
+
+    <div id="addpartial" aria-hidden="true"></div>
+    <div class="card mb-4 mt-4">
+        <div class="card-header">
+            <i class="fas fa-table mr-1"></i>
+            Kategori Listesi
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="kategoritable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Kategori</th>
+                            <th>Açıklama</th>
+                            <th>Aktif mi?</th>
+                            <th>Oluşturulma Tarihi</th>
+                            <th>Yapan Kişi</th>
+                            <th>Son Düzenlenme</th>
+                            <th>Son Düzenleyen</th>
+                            <th>İşlem</th>
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <th>ID</th>
+                            <th>Kategori</th>
+                            <th>Açıklama</th>
+                            <th>Aktif mi?</th>
+                            <th>Oluşturulma Tarihi</th>
+                            <th>Yapan Kişi</th>
+                            <th>Son Düzenlenme</th>
+                            <th>Son Düzenleyen</th>
+                            <th>İşlem</th>
+                        </tr>
+                    </tfoot>
+                    <tbody>
+                        @foreach (var item in Model.Categories)
+                        {
+
+                            <tr name="@item.Id">
+                                <td>@item.Id</td>
+                                <td>@item.CategoryName</td>
+                                <td>@item.CategoryDesc</td>
+                                <td>@item.IsActive</td>
+                                <td>@item.DateCreated.ToShortDateString()</td>
+                                <td>@item.CreatedName</td>
+                                <td>@item.EditDate.ToShortDateString()</td>
+                                <td>@item.EditedName</td>
+                                <td>
+                                    <button class="btn btn-primary btn-sm btn-block btn-guncelle" data-id="@item.Id">Güncelle</button>
+                                    <button class="btn btn-danger btn-sm btn-block btn-sil" data-id="@item.Id">Sil</button>
+
+                                </td>
+                            </tr>
+
+                        }
+
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+
+}
+
+@if (Model.SonucStatus == CoreBlog.Shared.Utilitie.Sonuc.ComplexType.SonucStatus.Error)
+{
+    <br />
+    <div class="alert alert-danger">
+        @Model.Message <br />
+        Ana Sayfaya geri dönmek için <a class="alert-link" asp-area="Admin" asp-controller="Home" asp-action="Index">tıklayınız.</a>
+
+    </div>
+
+}
+
+@section Scripts{
+
+    <script src="~/js/CategoryIndex.js" type="application/ecmascript">
+           
+    </script>
+
+}

@@ -1,0 +1,94 @@
+﻿@model CoreBlog.Entities.Dtos.BlogListDto
+
+@{
+    Layout = "_Layout";
+}
+<br />
+<br />
+<div class="card mb-4">
+    <div class="card-header">
+        <i class="fas fa-table mr-1"></i>
+        Bloglar
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="blogtable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Başlık</th>
+                        <th>Kategori</th>
+                        <th>Resim</th>
+                        <th>Paylaşılma Tarihi</th>
+                        <th>Yorum Sayısı</th>
+                        <th>Oluşturulma Tarihi</th>
+                        <th>Yapan Kişi</th>
+                        <th>Son Düzenlenme</th>
+                        <th>Son Düzenleyen</th>
+                        <th>İşlem</th>
+                    </tr>
+                </thead>
+                <tfoot>
+                    <tr>
+                        <th>#</th>
+                        <th>Başlık</th>
+                        <th>Kategori</th>
+                        <th>Resim</th>
+                        <th>Paylaşılma Tarihi</th>
+                        <th>Yorum Sayısı</th>
+                        <th>Oluşturulma Tarihi</th>
+                        <th>Yapan Kişi</th>
+                        <th>Son Düzenlenme</th>
+                        <th>Son Düzenleyen</th>
+                        <th>İşlem</th>
+                    </tr>
+                </tfoot>
+                <tbody>
+                    
+                    @foreach (var item in Model.Blogs)
+                    {
+                        <tr name="@item.Id">
+
+                            <td>@item.Id</td>
+                            <td>@item.BlogTitle</td>
+                            <td>@item.Category.CategoryName</td>
+                            <td><img src="~/img/@item.BlogImage" class="my-image-table" /></td>
+                            <td>@item.DateCreated</td>
+                            <td>@item.CommentCount</td>
+                            <td>@item.DateCreated.ToShortDateString()</td>
+                            <td>@item.CreatedName</td>
+                            <td>@item.EditDate.ToShortDateString()</td>
+                            <td>@item.EditedName</td>
+                            
+                            <td>
+                                <a class="btn btn-primary btn-sm btn-block btn-guncelle" data-id="@item.Id" asp-area="Admin" asp-controller="Blog" asp-action="Update" asp-route-blogid="@item.Id" >Güncelle</a>
+                                <button class="btn btn-danger btn-sm btn-block btn-sil" data-id="@item.Id">Sil</button>
+
+                            </td>
+
+                        </tr>
+
+                    }
+
+
+
+
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+
+    <script src="~/js/BlogIndex.js" type="application/ecmascript">
+
+    </script>
+
+}
+
+@section Style{
+
+    
+}

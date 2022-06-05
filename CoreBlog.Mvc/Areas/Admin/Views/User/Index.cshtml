@@ -1,0 +1,88 @@
+﻿@model CoreBlog.Entities.Dtos.UserListDto
+
+@{
+    ViewData["Title"] = "Kullanıcılar";
+    Layout = "_Layout";
+}
+
+
+@if (Model.SonucStatus == CoreBlog.Shared.Utilitie.Sonuc.ComplexType.SonucStatus.Success)
+{
+
+    <div id="addpartial" aria-hidden="true"></div>
+    <div class="card mb-4 mt-4">
+        <div class="card-header">
+            <i class="fas fa-table mr-1"></i>
+            Kullanıcı Listesi
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="usertable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Ad</th>
+                            <th>Mail</th>
+                            <th>Resim</th>
+                            <th>İşlem</th>
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <th>ID</th>
+                            <th>Ad</th>
+                            <th>Mail</th>
+                            <th>Resim</th>
+                            <th>İşlem</th>
+                        </tr>
+                    </tfoot>
+                    <tbody>
+                        @foreach (var item in Model.Users)
+                        {
+
+                            <tr name="@item.Id">
+
+                                <td>@item.Id</td>
+                                <td>@item.UserName</td>
+                                <td>@item.Email</td>
+                                <td><img src="~/img/@item.Picture" class="my-image-table" /></td>
+
+
+                                <td>
+                                    <button class="btn btn-primary btn-sm btn-block btn-guncelle" data-id="@item.Id">Güncelle</button>
+                                    <button class="btn btn-danger btn-sm btn-block btn-sil" data-id="@item.Id">Sil</button>
+                                    <button class="btn btn-primary btn-sm btn-block btn-ata" data-id="@item.Id">Rol Ata</button>
+
+                                </td>
+                            </tr>
+
+                        }
+
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+
+}
+
+@if (Model.SonucStatus == CoreBlog.Shared.Utilitie.Sonuc.ComplexType.SonucStatus.Error)
+{
+    <br />
+    <div class="alert alert-danger">
+        @Model.Message <br />
+        Ana Sayfaya geri dönmek için <a class="alert-link" asp-area="Admin" asp-controller="Home" asp-action="Index">tıklayınız.</a>
+
+    </div>
+
+}
+
+@section Scripts{
+
+    <script src="~/js/UserIndex.js" type="application/ecmascript">
+
+    </script>
+
+}

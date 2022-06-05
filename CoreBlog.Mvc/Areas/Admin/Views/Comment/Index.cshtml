@@ -1,0 +1,75 @@
+﻿@model CoreBlog.Entities.Dtos.CommentListDto
+@{
+    Layout = "_Layout";
+    ViewBag.Title = "Yorumlar";
+}
+
+<div id="modalPlaceHolder" aria-hidden="true"></div>
+<div class="card mb-4">
+    <div class="card-header">
+        <i class="fas fa-table mr-1"></i>
+        Yorumlar
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="commentsTable" width="100%" cellspacing="0">
+                <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Yorum İçeriği</th>
+                    <th>Aktif Mi?</th>
+                    <th>Silinmiş Mi?</th>
+                    <th>Oluşturulma Tarihi</th>
+                    <th>Oluşturan Kullanıcı Adı</th>
+                    <th>Son Düzenlenme Tarihi</th>
+                    <th>Son Düzenleyen Kullanıcı Adı</th>
+                    <th>İşlemler</th>
+                </tr>
+                </thead>
+                <tfoot>
+                <tr>
+                    <th>#</th>
+                    <th>Yorum İçeriği</th>
+                    <th>Aktif Mi?</th>
+                    <th>Silinmiş Mi?</th>
+                    <th>Oluşturulma Tarihi</th>
+                    <th>Oluşturan Kullanıcı Adı</th>
+                    <th>Son Düzenlenme Tarihi</th>
+                    <th>Son Düzenleyen Kullanıcı Adı</th>
+                    <th>İşlemler</th>
+                </tr>
+                </tfoot>
+                <tbody>
+                @foreach (var comment in Model.Comments)
+                {
+                    <tr name="@comment.Id">
+                        <td>@comment.Id</td>
+                        @*<td>@comment.Blog.BlogTitle</td>*@
+                        <td>@(comment.CommentText.Length>75 ? comment.CommentText.Substring(0, 75):comment.CommentText)</td>
+                        <td>@(comment.IsActive ? "Evet" : "Hayır")</td>
+                        <td>@(comment.IsDeleted ? "Evet" : "Hayır")</td>
+                        <td>@comment.DateCreated.ToShortDateString()</td>
+                        <td>@comment.CreatedName</td>
+                        <td>@comment.EditDate.ToShortDateString()</td>
+                        <td>@comment.EditedName</td>
+                        <td>
+                            @if (!comment.IsActive)
+                            {
+                                <button class="btn btn-warning btn-sm btn-approve" data-id="@comment.Id"><span class="fas fa-thumbs-up"></span></button>
+                            }
+                            <button class="btn btn-info btn-sm btn-detail" data-id="@comment.Id"><span class="fas fa-newspaper"></span></button>
+                            <button class="btn btn-primary btn-sm mt-1 btn-update" data-id="@comment.Id"><span class="fas fa-edit"></span></button>
+                            <button class="btn btn-danger btn-sm mt-1 btn-delete" data-id="@comment.Id"><span class="fas fa-minus-circle"></span></button>
+                        </td>
+                    </tr>
+                }
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+@section Scripts
+{
+    <script src="~/js/commentIndex.js" type="application/ecmascript"></script>
+}

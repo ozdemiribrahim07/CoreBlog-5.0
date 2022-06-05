@@ -1,0 +1,48 @@
+﻿@model CoreBlog.Entities.Dtos.UserLoginDto
+
+@{ 
+    ViewBag.Title = "Giriş";
+    Layout = "_UserLogin";
+}
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-lg-5">
+            <div class="card shadow-lg border-0 rounded-lg mt-5">
+                <div class="card-header"><h3 class="text-center font-weight-light my-4">Giriş Yap</h3></div>
+                <div class="card-body">
+
+                    <form asp-action="Login" asp-controller="Auth" method="post">
+                        <div asp-validation-summary="All"></div>
+
+                        <div class="form-group">
+                            <label class="small mb-1" asp-for="Email">Email</label>
+                            <input class="form-control py-4" asp-for="Email" type="email" placeholder="Mail adresi giriniz.." />
+                            <span asp-validation-for="Email" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="small mb-1" asp-for="Password">Password</label>
+                            <input class="form-control py-4" asp-for="Password" type="password" placeholder="Şifre giriniz.." />
+                            <span asp-validation-for="Password" class="text-danger"></span>
+
+                        </div>
+
+                        <div class="form-group">
+                            <div class="custom-control custom-checkbox">
+                                <input class="custom-control-input" asp-for="BeniHatırla" type="checkbox" />
+                                <label class="custom-control-label" asp-for="BeniHatırla" > Beni Hatırla </label>
+                            </div>
+
+                        </div>
+
+                        <div class="form-group d-flex align-items-center justify-content-between mt-4 mb-0">
+                            <a class="small" >Şifre mi Unuttum?</a>
+                            <button type="submit" class="btn btn-primary">Giriş Yap</button>
+                        </div>
+                    </form>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>

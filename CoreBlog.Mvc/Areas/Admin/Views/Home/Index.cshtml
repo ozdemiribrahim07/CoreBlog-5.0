@@ -1,0 +1,105 @@
+﻿@model CoreBlog.Mvc.Areas.Admin.Models.DashboardModel
+
+@{ 
+    Layout = "_Layout";
+
+}
+
+<br />
+<br />
+<div class="row">
+    <div class="col-xl-3 col-md-6">
+        <div class="card bg-primary text-white mb-4">
+            <div class="card-body">Bloglar (@Model.BlogCount)</div>
+            <div class="card-footer d-flex align-items-center justify-content-between">
+                <a class="small text-white stretched-link" asp-area="Admin" asp-controller="Blog" asp-action="Index">Ayrıntılar</a>
+                <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-3 col-md-6">
+        <div class="card bg-warning text-white mb-4">
+            <div class="card-body">Kategoriler (@Model.CategorieCount)</div>
+            <div class="card-footer d-flex align-items-center justify-content-between">
+                <a class="small text-white stretched-link" asp-area="Admin" asp-controller="Category" asp-action="Index">Ayrıntılar</a>
+                <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-3 col-md-6">
+        <div class="card bg-success text-white mb-4">
+            <div class="card-body">Yorumlar (@Model.CommentCount)</div>
+            <div class="card-footer d-flex align-items-center justify-content-between">
+                <a class="small text-white stretched-link" asp-area="Admin" asp-controller="Comments" asp-action="Index">Ayrıntılar</a>
+                <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-3 col-md-6">
+        <div class="card bg-danger text-white mb-4">
+            <div class="card-body">Kullanıcılar (@Model.UserCount)</div>
+            <div class="card-footer d-flex align-items-center justify-content-between">
+                <a class="small text-white stretched-link" asp-area="Admin" asp-controller="User" asp-action="Index">Ayrıntılar</a>
+                <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="card mb-4">
+    <div class="card-header">
+        <i class="fas fa-table mr-1"></i>
+        En Son Paylaşılan Bloglar
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="blogtable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Başlık</th>
+                        <th>Kategori</th>
+                        <th>Resim</th>
+                        <th>Paylaşılma Tarihi</th>
+                        <th>Yorum Sayısı</th>
+                    </tr>
+                </thead>
+                <tfoot>
+                    <tr>
+                        <th>#</th>
+                        <th>Başlık</th>
+                        <th>Kategori</th>
+                        <th>Resim</th>
+                        <th>Paylaşılma Tarihi</th>
+                        <th>Yorum Sayısı</th>
+                    </tr>
+                </tfoot>
+                <tbody>
+                    @foreach (var item in Model.Blogs.Blogs)
+                    {
+                        <tr>
+                            <td>@item.Id</td>
+                            <td>@item.BlogTitle</td>
+                            <td>@item.Category.CategoryName</td>
+                            <td><img src="~/img/@item.BlogImage" class="my-image-table" /></td>
+                            <td>@item.DateCreated</td>
+                            <td>@item.CommentCount</td>
+                        </tr>
+
+                    }
+
+
+
+
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+@section Scripts{ 
+
+    <script src="~/js/homeTable.js" type="application/ecmascript"></script>
+
+}
