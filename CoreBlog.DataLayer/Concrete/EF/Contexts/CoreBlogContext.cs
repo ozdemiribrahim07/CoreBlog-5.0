@@ -13,7 +13,7 @@ namespace CoreBlog.DataLayer.Concrete.EF.Contexts
     public class CoreBlogContext:IdentityDbContext<User,Role,int,UserClaim,UserRole,UserLogin,RoleClaim,UserToken>
     {
         public DbSet<Blog> Blogs { get; set; }
-        public DbSet<Role> Comments { get; set; }
+        public DbSet<Comment> Comments { get; set; }
         public DbSet<Category> Categories { get; set; }
 
 
